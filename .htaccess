@@ -1,0 +1,26 @@
+RewriteEngine On
+Options +FollowSymLinks
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# first enable expires module,deflatemodule, headers module
+<IfModule mod_headers.c>
+    
+    <FilesMatch "\.(jpg|jpeg|png|gif|swf|css|js)$">
+        Header set Cache-Control "max-age=31536000, public, must-revalidate"
+    </FilesMatch>
+
+    
+    <FilesMatch "\.(js|swf)$">
+        Header set Cache-Control "max-age=604800,public"
+    </FilesMatch>
+</IfModule>
+
+
+# Or, compress certain file types by extension:
+<files *.html,*.css,*.js>
+SetOutputFilter DEFLATE
+</files>
