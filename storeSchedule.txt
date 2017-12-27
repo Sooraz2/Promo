@@ -1,0 +1,450 @@
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[RUN_UNIFUN_PROMO_REPORT]
+	-- Add the parameters for the stored procedure here
+
+AS
+BEGIN
+-- EXEC [dbo].[RUN_UNIFUN_PROMO_REPORT]
+
+	SET NOCOUNT ON;
+
+	DECLARE @Datetime datetime
+
+    SET @Datetime = dateadd(day,datediff(day,1,GETDATE()),0);
+
+	DECLARE @Proc VARCHAR(MAX);
+
+ BEGIN TRY
+
+	exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Armenia','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_AM_v2]'
+
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH;
+
+
+
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Armenia','Beeline','Humor','[VCHReports].[dbo].[ReportHumorClubBeelineAM]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Armenia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineAM_v2]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Radio','[VCHReports].[dbo].[FB_ReportRadioAZERCELL_AZ]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Funbox','[VCHReports].[dbo].[ReportFunBoxAZERCELL_AZ]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Funbox','[VCHReports].[dbo].[ReportFunBoxLife_BY]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Humor','[VCHReports].[dbo].[FB_ReportHumorLIFE_BY]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Nastroenie','[VCHReports].[dbo].[FB_ReportNastroenieLIFE_BY]'
+    END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','VCH','[VCHReports].[dbo].[ReportVCHLife_BY]' 
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Funbox','[VCHReports].[dbo].[ReportFunBoxMTS_BY]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Radio','[VCHReports].[dbo].[FB_ReportRadioMTS_BY]' 
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Humor','[VCHReports].[dbo].[ReportHumorClubMTSBy]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','VCH','[VCHReports].[dbo].[ReportVCHMTS_BY]' 
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Velcom','Funbox','[VCHReports].[dbo].[ReportFunBoxVELCOME_BY]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Velcom','VCH','[VCHReports].[dbo].[ReportVCHVELCOM_BELAR]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Georgia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineGR]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_KG]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','Radio','[VCHReports].[dbo].[FB_ReportRadioBEELINE_KG]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineKG]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','Funbox','[VCHReports].[dbo].[ReportFunBoxNURTELECOM_KG]' 
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','Radio','[VCHReports].[dbo].[ReportRadioNURTELECOM_KG]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','VCH','[VCHReports].[dbo].[ReportVCHNurtelecomKG]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Megacom','Nastroenie','[VCHReports].[dbo].[ReportNastroenieMEGACOM_KG1]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Moldcell','Funbox','[VCHReports].[dbo].[ReportTableFunBox]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Moldcell','VCH','[VCHReports].[dbo].[ReportTableSunaSiAmuzaV3]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Unite','Funbox','[VCHReports].[dbo].[ReportFunBoxUNITE_MD_v2]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Jordan','Zain','Radio','[VCHReports].[dbo].[FB_ReportRadioZainJordan]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Jordan','Orange','Radio','[VCHReports].[dbo].[FB_ReportRadioOrangeJordan]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_TJ_v2]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Humor','[VCHReports].[dbo].[ReportHumorClubBeelineTJ]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Radio','[VCHReports].[dbo].[ReportRadioBEELINE_TJ]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeeline_TJ]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_Zervana','Funbox','[VCHReports].[dbo].[ReportFunBoxBABILON_ZER_TJ_v2]'
+END TRY
+BEGIN CATCH
+
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','Funbox','[VCHReports].[dbo].[ReportFunBoxBABILON_ZM_TJ_v2]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','Radio','[VCHReports].[dbo].[FB_ReportRadioBABILON_ZARINM_TJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','VCH','[VCHReports].[dbo].[ReportVCHBabilon_ZarinM_TJ_v2]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','Funbox','[VCHReports].[dbo].[ReportFunBoxMEGAFON_TJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','VCH','[VCHReports].[dbo].[ReportVCHMegafonTJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','Radio','[VCHReports].[dbo].[ReportRadioMegafone_TJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Tcell','Funbox','[VCHReports].[dbo].[ReportFunBoxTCELL_TJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Tcell','VCH','[VCHReports].[dbo].[ReportVCH_TCELL_TJ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Turkmenistan','MTS','Funbox','[VCHReports].[dbo].[FB_ReportFunBoxMTS_TM]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Turkmenistan','MTS','Nastroenie','[VCHReports].[dbo].[FB_ReportNastroenieMTS_TM]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_UZ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Ucell','Funbox','[VCHReports].[dbo].[ReportFunBoxUCELL_UZ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','UMS','Funbox','[VCHReports].[dbo].[FB_ReportFunBoxUMS_UZ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','UMS','Radio','[VCHReports].[dbo].[FB_ReportRadioUMS_UZ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Cameroon','Nexttel','Radio','[VCHReports].[dbo].[FB_ReportRadioNexttelCameroon]'
+END TRY
+BEGIN CATCH
+END CATCH;
+
+  --VCHReportsdboFBReportMelomaniaAZERCELLAZ
+  BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Melomania','[VCHReports].[dbo].[FB_ReportMelomaniaAZERCELL_AZ]'
+END TRY
+BEGIN CATCH
+END CATCH;
+--VCHReportsdboFBReportMelomaniaAZERCELLAZ
+
+
+  --VCHReportsdboFBReportRadioSabaFonYemen
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Yemen','Sabafon','Radio','[VCHReports].[dbo].[FB_ReportRadioSabaFonYemen]'
+--VCHReportsdboFBReportRadioSabaFonYemen
+
+  --VCHReportsdboFBReportMelomaniaBEELINEUZ
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Beeline','Melomania','[VCHReports].[dbo].[FB_ReportMelomania_BEELINE_UZ]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportMelomaniaBEELINEUZ
+  --VCHReportsdboFBReportRadioUcellUZ
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Ucell','Radio','[VCHReports].[dbo].[FB_ReportRadioUcellUZ]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioUcellUZ
+  --VCHReportsdboFBReportRadioTigoTD
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Chad','Tigo','Radio','[VCHReports].[dbo].[FB_ReportRadioTigoTD]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioTigoTD
+  --VCHReportsdboFBReportRadioAWCCAF
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Afganistan','AWCC','Radio','[VCHReports].[dbo].[FB_ReportRadioAWCCAF]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioAWCCAF
+  --VCHReportsdboFBReportRadioMovitelMZ
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Mozambique','Movitel','Radio','[VCHReports].[dbo].[FB_ReportRadioMovitelMZ]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioMovitelMZ
+  --VCHReportsdboFBReportIslamicTigoTD
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Chad','Tigo','Islamic','[VCHReports].[dbo].[FB_ReportIslamicTigoTD]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportIslamicTigoTD
+  --VCHReportsdboFBReportChristianTigoTD
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Chad','Tigo','Cristian','[VCHReports].[dbo].[FB_ReportChristianTigoTD]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportChristianTigoTD
+  --VCHReportsdboFBReportRadioSudaniSD
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Sudan','Sudani','Radio','[VCHReports].[dbo].[FB_ReportRadioSudaniSD]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioSudaniSD
+  --VCHReportsdboFBReportRadioBEELINEUZ
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Beeline','Radio','[VCHReports].[dbo].[FB_ReportRadio_BEELINE_UZ]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportRadioBEELINEUZ
+  --VCHReportsdboFBReportMelomaniaUMSUZ
+ BEGIN TRY 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','UMS','Melomania','[VCHReports].[dbo].[FB_ReportMelomania_UMS_UZ]'
+ END TRY 
+ BEGIN CATCH 
+ END CATCH; 
+--VCHReportsdboFBReportMelomaniaUMSUZ
+ --ADDNEWELSEIF
+
+
+ 
+ EXEC UnifunPromoErrorProc
+
+
+----------------------------------
+/*exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Armenia','Beeline','Humor','[VCHReports].[dbo].[ReportHumorClubBeelineAM]' -- Table1--
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Armenia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineAM_v2]' -- Table2--
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Radio','[VCHReports].[dbo].[FB_ReportRadioAZERCELL_AZ]' -- Table3 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Funbox','[VCHReports].[dbo].[ReportFunBoxAZERCELL_AZ]' -- Table4 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Funbox','[VCHReports].[dbo].[ReportFunBoxLife_BY]' -- Table5 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Humor','[VCHReports].[dbo].[FB_ReportHumorLIFE_BY]' -- Table6 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','Nastroenie','[VCHReports].[dbo].[FB_ReportNastroenieLIFE_BY]'--  -- fixed Table7(The operation could not be performed because OLE DB provider "MSDASQL" for linked server "BELARUS_LIFE_NASTROENIE_REPORTS" was unable to begin a distributed transaction.)
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Life','VCH','[VCHReports].[dbo].[ReportVCHLife_BY]' -- Table8 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Funbox','[VCHReports].[dbo].[ReportFunBoxMTS_BY]' -- Table9 --ReportFunBoxMTS_BY  --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Radio','[VCHReports].[dbo].[FB_ReportRadioMTS_BY]' -- Table10 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','Humor','[VCHReports].[dbo].[ReportHumorClubMTSBy]' -- Table11 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','MTS','VCH','[VCHReports].[dbo].[ReportVCHMTS_BY]' -- Table12 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Velcom','Funbox','[VCHReports].[dbo].[ReportFunBoxVELCOME_BY]' -- Table13 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Belarus','Velcom','VCH','[VCHReports].[dbo].[ReportVCHVELCOM_BELAR]' -- Table14 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Georgia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineGR]' -- Table15 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_KG]' -- Table16 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','Radio','[VCHReports].[dbo].[FB_ReportRadioBEELINE_KG]' -- Table17 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeelineKG]' -- Table18 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','Funbox','[VCHReports].[dbo].[ReportFunBoxNURTELECOM_KG]' -- Table19  --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','Radio','[VCHReports].[dbo].[ReportRadioNURTELECOM_KG]'-- Table20 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Nurtelecom','VCH','[VCHReports].[dbo].[ReportVCHNurtelecomKG]'-- Table21) -- 
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Kirghizia','Megacom','Nastroenie','[VCHReports].[dbo].[ReportNastroenieMEGACOM_KG1]'-- Table22 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Moldcell','Funbox','[VCHReports].[dbo].[ReportTableFunBox]'-- Table23(default server name) --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Moldcell','VCH','[VCHReports].[dbo].[ReportTableSunaSiAmuzaV3]'-- Table24 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Moldova','Unite','Funbox','[VCHReports].[dbo].[ReportFunBoxUNITE_MD_v2]'-- Table25 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Jordan','Zain','Radio','[VCHReports].[dbo].[FB_ReportRadioZainJordan]'-- Table26 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Jordan','Orange','Radio','[VCHReports].[dbo].[FB_ReportRadioOrangeJordan]'-- Table47 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_TJ_v2]'-- Table27 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Humor','[VCHReports].[dbo].[ReportHumorClubBeelineTJ]'-- Table28 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','Radio','[VCHReports].[dbo].[ReportRadioBEELINE_TJ]'-- Table29 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Beeline','VCH','[VCHReports].[dbo].[ReportVCHBeeline_TJ]'-- Table30 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_Zervana','Funbox','[VCHReports].[dbo].[ReportFunBoxBABILON_ZER_TJ_v2]'-- Table31 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','Funbox','[VCHReports].[dbo].[ReportFunBoxBABILON_ZM_TJ_v2]'-- Table32 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','Radio','[VCHReports].[dbo].[FB_ReportRadioBABILON_ZARINM_TJ]'-- Table33 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Babilon_ZarinM','VCH','[VCHReports].[dbo].[ReportVCHBabilon_ZarinM_TJ_v2]'-- Table34
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','Funbox','[VCHReports].[dbo].[ReportFunBoxMEGAFON_TJ]'-- Table35 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','VCH','[VCHReports].[dbo].[ReportVCHMegafonTJ]'-- Table36 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Megafon','Radio','[VCHReports].[dbo].[ReportRadioMegafone_TJ]'-- Table37 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Tcell','Funbox','[VCHReports].[dbo].[ReportFunBoxTCELL_TJ]'-- Table38 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Tadjikistan','Tcell','VCH','[VCHReports].[dbo].[ReportVCH_TCELL_TJ]'-- Table39 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Turkmenistan','MTS','Funbox','[VCHReports].[dbo].[FB_ReportFunBoxMTS_TM]'-- Table40 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Turkmenistan','MTS','Nastroenie','[VCHReports].[dbo].[FB_ReportNastroenieMTS_TM]'-- Table41  --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Beeline','Funbox','[VCHReports].[dbo].[ReportFunBoxBEELINE_UZ]'-- Table42 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','Ucell','Funbox','[VCHReports].[dbo].[ReportFunBoxUCELL_UZ]'-- Table43 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','UMS','Funbox','[VCHReports].[dbo].[FB_ReportFunBoxUMS_UZ]'-- Table44 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Uzbekistan','UMS','Radio','[VCHReports].[dbo].[FB_ReportRadioUMS_UZ]'-- Table45 --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Cameroon','Nexttel','Radio','[VCHReports].[dbo].[FB_ReportRadioNexttelCameroon]'-- Table46 FB_ReportRadioNexttelCameroon  --
+exec  [VCHReports].[dbo].[Unufun_Promo_DataCollection] 'Azerbaijan','Azercell','Melomania','[VCHReports].[dbo].[FB_ReportMelomaniaAZERCELL_AZ]'
+*/
+
+  
+  
+
+
+--select COUNT(*) from [VCHReports].[dbo].[Unifun_Promo] where Date = '2017-01-04' AND Operator = 'MTS' AND Service = 'Humor'
+--SELECT * FROM [dbo].[UnifunPromoLog]
+-- DELETE FROM [dbo].[UnifunPromoLog]
+--SELECT COUNT(*) from [VCHReports].[dbo].[Unifun_Promo] where Date = '2016-12-12'
+--truncate table [VCHReports].[dbo].[Unifun_Promo]
+-- SELECT COUNT(*) FROM [dbo].[Unifun_Promo] WHERE Country = 'Armenia' AND Operator = 'Beeline' AND Service = 'Funbox' AND Date= '2017-01-04'
+
+
+
+END
+	

@@ -1,0 +1,44 @@
+ --VCHReportsdboFBReportMelomaniaUMSUZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportMelomania_UMS_UZ]' 
+ BEGIN  
+DECLARE @Table171127114608 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+PaidCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+PerMinTurnover VARCHAR(50),
+PerMinTurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey32 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127114608 EXEC [VCHReports].[dbo].[FB_ReportMelomania_UMS_UZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127114608
+ END
+ --VCHReportsdboFBReportMelomaniaUMSUZ
+
+
+ --ADDNEWELSEIF

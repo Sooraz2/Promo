@@ -1,0 +1,2533 @@
+CREATE PROCEDURE [dbo].[Unufun_Promo_DataCollection] (@Country varchar(max),@Operator varchar(max),@Service varchar(max), @Procudure varchar(max),@RunAgain int = 0) -- exec  [dbo].[RevenueReportDataCollection_IVR2] Armenian,Beepcall,Funbox
+	
+AS
+BEGIN
+--BEGIN TRY
+
+
+
+--SELECT * FROM [VCHReports].[dbo].[Unifun_Promo]
+--TRUNCATE TABLE [VCHReports].[dbo].[Unifun_Promo]
+
+
+DECLARE @Datetime datetime
+DECLARE @DateFrom datetime
+SET @DateFrom = dateadd(day,datediff(day,1,GETDATE()),0);
+
+SET @Datetime = dateadd(day,datediff(day,1,GETDATE()),0);
+
+BEGIN TRY
+
+If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBEELINE_AM_v2]' 
+BEGIN
+
+
+  DECLARE @Table TABLE  (
+  date DATETIME,
+  SERVICE VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    
+		
+    	INSERT INTO @Table
+		EXEC @Procudure "Servername" ,@DateFrom,@Datetime
+
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table
+		
+	
+		
+		
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportHumorClubBeelineAM]'
+BEGIN
+
+DECLARE @Table1 TABLE  (
+  date DATETIME,
+  SERVICE VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+       
+		
+    	INSERT INTO @Table1
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table1
+	
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHBeelineAM_v2]'
+BEGIN
+
+DECLARE @Table2 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table2
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table2
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioAZERCELL_AZ]'
+BEGIN
+
+DECLARE @Table3 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table3
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table3
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxAZERCELL_AZ]'
+BEGIN
+
+
+DECLARE @Table4 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table4
+		EXEC @Procudure "ServerName", @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table4
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxLife_BY]'
+BEGIN
+
+
+DECLARE @Table5 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table5
+		EXEC @Procudure "ServerName", @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table5
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportHumorLIFE_BY]'
+BEGIN
+
+DECLARE @Table6 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial int,
+ unicsubscriptionspaid int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ totalactivesubscribe int,
+ totalcallduration_ivr float,
+ totalcallduration_b float,
+ mediumcallduration_ivr float,
+ mediumcallduration_b float,
+ Turnover float,
+ TurnoverUSD float,
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table6
+		EXEC @Procudure "0.05", "0.09", @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table6
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportNastroenieLIFE_BY]'
+BEGIN
+
+DECLARE @Table7 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial int,
+ unicsubscriptionspaid int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ totalactivesubscribe int,
+ totalcallduration float,
+ Turnover float,
+ TurnoverUSD float,
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table7
+		EXEC @Procudure "0.05", "900", @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table7
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHLife_BY]'
+BEGIN
+
+DECLARE @Table8 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table8
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table8
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxMTS_BY]'
+BEGIN
+
+DECLARE @Table9 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+
+		
+    	INSERT INTO @Table9
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table9
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioMTS_BY]'
+BEGIN
+
+DECLARE @Table10 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table10
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table10
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportHumorClubMTSBy]'
+BEGIN
+
+DECLARE @Table11 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table11
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table11
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHMTS_BY]'
+BEGIN
+
+DECLARE @Table12 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table12
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table12
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxVELCOME_BY]'
+BEGIN
+
+DECLARE @Table13 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table13
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table13
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHVELCOM_BELAR]'
+BEGIN
+
+DECLARE @Table14 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ AllSubscriberTrial int,
+ AllSubscriberPaid int,
+ TrialToRegularOk int,
+ TrialToRegularNotOk int,
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ TotalCallDurationB float,
+ Turnover float,
+ TurnoverUSD float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration float,
+ AvgCallDurationB float,
+ ProcentAllSuccessfulTarif float,
+ ProcentAllStoped float,
+ ProcentService float
+)
+
+      
+	  
+		
+    	INSERT INTO @Table14
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table14
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHBeelineGR]'
+BEGIN
+
+DECLARE @Table15 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+    	INSERT INTO @Table15
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table15
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBEELINE_KG]'
+BEGIN
+
+DECLARE @Table16 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+    	INSERT INTO @Table16
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table16
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioBEELINE_KG]'
+BEGIN
+
+DECLARE @Table17 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+ 
+)
+
+    	INSERT INTO @Table17
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table17
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHBeelineKG]'
+BEGIN
+DECLARE @Table18 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ TrialToRegularOk int,
+ TrialToRegularNotOk int,
+  ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration float,
+ AvgCallDurationB float,
+ ProcentAllSuccessfulTarif float,
+ ProcentAllStoped float,
+ ProcentService float
+)
+    	INSERT INTO @Table18
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table18
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxNURTELECOM_KG]'
+BEGIN
+DECLARE @Table19 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table19
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table19
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportRadioNURTELECOM_KG]'
+BEGIN
+DECLARE @Table20 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table20
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table20
+	 
+
+END
+
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHNurtelecomKG]'
+BEGIN
+DECLARE @Table21 TABLE  (
+ date DATETIME,
+ Service VARCHAR(50),
+ TrialToRegularOk int,
+ TrialToRegularNotOk int,
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ TotalCallDurationB float,
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table21
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table21
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportNastroenieMEGACOM_KG1]'
+BEGIN
+DECLARE @Table22 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table22
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table22
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportTableFunBox]'
+BEGIN
+DECLARE @Table23 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ TrialToRegularOk int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table23
+		EXEC @Procudure "MOLDCELL_FUNBOX",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table23
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportTableSunaSiAmuzaV3]'
+BEGIN
+DECLARE @Table24 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ TotalCallDurationB float,
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table24
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table24
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxUNITE_MD_v2]'
+BEGIN
+DECLARE @Table25 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table25
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table25
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioZainJordan]'
+BEGIN
+
+DECLARE @Table26 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table26
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table26
+	 
+
+END
+
+
+
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBEELINE_TJ_v2]'
+BEGIN
+DECLARE @Table27 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table27
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table27
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportHumorClubBeelineTJ]'
+BEGIN
+DECLARE @Table28 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration float,
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB float,
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table28
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table28
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportRadioBEELINE_TJ]'
+BEGIN
+DECLARE @Table29 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table29
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table29
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHBeeline_TJ]'
+BEGIN
+DECLARE @Table30 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration float,
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB float,
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table30
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table30
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBABILON_ZER_TJ_v2]'
+BEGIN
+DECLARE @Table31 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table31
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table31
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBABILON_ZM_TJ_v2]'
+BEGIN
+DECLARE @Table32 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table32
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table32
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioBABILON_ZARINM_TJ]'
+BEGIN
+
+DECLARE @Table33 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial int,
+ unicsubscriptionspaid int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ TurnoverUSD float,
+ Turnover float,
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table33
+		EXEC @Procudure "0.06","0.30",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table33
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHBabilon_ZarinM_TJ_v2]'
+BEGIN
+DECLARE @Table34 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration float,
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+
+)
+    	INSERT INTO @Table34
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table34
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxMEGAFON_TJ]'
+BEGIN
+DECLARE @Table35 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ TrialToRegularOk int,
+ TrialToRegularNotOk int,
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration float,
+ ProcentAllSuccessfulTarif float,
+ ProcentAllStoped float,
+ ProcentService float
+)
+    	INSERT INTO @Table35
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table35
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCHMegafonTJ]'
+BEGIN
+DECLARE @Table36 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ TrialToRegularOk int,
+ TrialToRegularNotOk int,
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ TotalCallDurationB VARCHAR(50),
+ Turnover float,
+ AllSubscribersTrial VARCHAR(50),
+ AllSubscribersPayed VARCHAR(50),
+ AvgCallDuration float,
+ AvgCallDurationB VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService float
+)
+    	INSERT INTO @Table36
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table36
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportRadioMegafone_TJ]'
+BEGIN
+DECLARE @Table37 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table37
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table37
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxTCELL_TJ]'
+BEGIN
+DECLARE @Table38 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table38
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table38
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportVCH_TCELL_TJ]'
+BEGIN
+
+DECLARE @Table39 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk VARCHAR(50),
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDurationB VARCHAR(50),
+ TotalCallDurationB VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentAllService VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+
+       
+		
+    	INSERT INTO @Table39
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table39
+	
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportFunBoxMTS_TM]'
+BEGIN
+DECLARE @Table40 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk int,
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial varchar(50),
+ unicsubscriptionspaid varchar(50),
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float, 
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ totalactivesubscribe VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentAStoped VARCHAR(50),
+ ProcentService float,
+ TurnoverUSD float,
+ Turnover float,
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+)
+    	INSERT INTO @Table40
+		EXEC @Procudure "0.057","0.2",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table40
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportNastroenieMTS_TM]'
+BEGIN
+DECLARE @Table41 TABLE  (
+   date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk int,
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial varchar(50),
+ unicsubscriptionspaid varchar(50),
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ totalactivesubscribe VARCHAR(50),
+ totalcallduration VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService float,
+ TurnoverUSD float,
+ Turnover float,
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+)
+    	INSERT INTO @Table41
+		EXEC @Procudure "0.057","0.2",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table41
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxBEELINE_UZ]'
+BEGIN
+DECLARE @Table42 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table42
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table42
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[ReportFunBoxUCELL_UZ]'
+BEGIN
+DECLARE @Table43 TABLE  (
+  date DATETIME,
+  Service VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed int,
+ NewSubscribersPayed int,
+ NewSubscribersTrial int,
+ TrialToRegularOk int,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration float,
+ Turnover float,
+ TurnoverUSD float,
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50)
+)
+    	INSERT INTO @Table43
+		EXEC @Procudure "ServerName",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table43
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportFunBoxUMS_UZ]'
+BEGIN
+
+DECLARE @Table44 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ unicsubscriptionstrial int,
+ unicsubscriptionspaid int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ totalactivesubscribe int,
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ TurnoverUSD float,
+ Turnover float,
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table44
+		EXEC @Procudure "0.05","131.05",@DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table44
+	 
+
+END
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioUMS_UZ]'
+BEGIN
+
+DECLARE @Table45 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table45
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table45
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioNexttelCameroon]'
+BEGIN
+
+DECLARE @Table46 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+)
+
+      
+	  
+		
+    	INSERT INTO @Table46
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table46
+	 
+
+END
+
+
+Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioOrangeJordan]'
+BEGIN
+
+DECLARE @Table47 TABLE  (
+  date DATETIME,
+  servicekey VARCHAR(50),
+ ActiveStartDayTrial int,
+ ActiveStartDayPayed VARCHAR(50),
+ NewSubscribersTrial int,
+ NewSubscribersPayed int,
+ TrialToRegularOk VARCHAR(50),
+ ActiveSubscription VARCHAR(50),
+ StoppedSubscribersTrial int,
+ StoppedSubscribersPayed int,
+ SuccessfulTarification VARCHAR(50),
+ NotSuccessfulTarification VARCHAR(50),
+ UnicAbon int,
+ UnicAbonByDate VARCHAR(50),
+ UnicCall VARCHAR(50),
+ CountCall VARCHAR(50),
+ TotalCallDuration VARCHAR(50),
+ AvgCallDuration VARCHAR(50),
+ ProcentAllSuccessfulTarif VARCHAR(50),
+ ProcentAllStoped VARCHAR(50),
+ Turnover float,
+ TurnoverUSD float,
+ TotalSubscribersTrial VARCHAR(50),
+ TotalSubscribersPaid VARCHAR(50),
+ ProcentSuccessfulTarif VARCHAR(50),
+ ProcentStoped VARCHAR(50),
+ ProcentService VARCHAR(50),
+ Service VARCHAR(50),
+ ServiceKey1 VARCHAR(50)
+
+ 
+)
+
+      
+	  
+		
+    	INSERT INTO @Table47
+		EXEC @Procudure @DateFrom,@Datetime
+		INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,NewSubscribersPayed+NewSubscribersTrial,StoppedSubscribersTrial+StoppedSubscribersPayed,UnicAbon FROM @Table47
+	 
+
+END
+
+ --VCHReportsdboFBReportMelomaniaAZERCELLAZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportMelomaniaAZERCELL_AZ]' 
+ BEGIN  
+DECLARE @Table161214042437 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+PaidCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+PerMinTurnover VARCHAR(50),
+PerMinTurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey32 VARCHAR(50) 
+ ) 
+INSERT INTO @Table161214042437 EXEC [VCHReports].[dbo].[FB_ReportMelomaniaAZERCELL_AZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT)+CAST(NewSubscribersTrial as INT),CAST(StoppedSubscribersTrial AS INT)+CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table161214042437
+ END
+ --VCHReportsdboFBReportMelomaniaAZERCELLAZ
+
+
+  --VCHReportsdboFBReportRadioSabaFonYemen
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioSabaFonYemen]' 
+ BEGIN  
+DECLARE @Table161221113142 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table161221113142 EXEC [VCHReports].[dbo].[FB_ReportRadioSabaFonYemen]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table161221113142
+ END
+ --VCHReportsdboFBReportRadioSabaFonYemen
+
+
+  --VCHReportsdboFBReportMelomaniaBEELINEUZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportMelomania_BEELINE_UZ]' 
+ BEGIN  
+DECLARE @Table170111060751 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+PaidCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+PerMinTurnover VARCHAR(50),
+PerMinTurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey32 VARCHAR(50) 
+ ) 
+INSERT INTO @Table170111060751 EXEC [VCHReports].[dbo].[FB_ReportMelomania_BEELINE_UZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table170111060751
+ END
+ --VCHReportsdboFBReportMelomaniaBEELINEUZ
+
+
+  --VCHReportsdboFBReportRadioUcellUZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioUcellUZ]' 
+ BEGIN  
+DECLARE @Table170222101658 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table170222101658 EXEC [VCHReports].[dbo].[FB_ReportRadioUcellUZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table170222101658
+ END
+ --VCHReportsdboFBReportRadioUcellUZ
+
+
+  --VCHReportsdboFBReportRadioTigoTD
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioTigoTD]' 
+ BEGIN  
+DECLARE @Table171124015429 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171124015429 EXEC [VCHReports].[dbo].[FB_ReportRadioTigoTD]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171124015429
+ END
+ --VCHReportsdboFBReportRadioTigoTD
+
+
+  --VCHReportsdboFBReportRadioAWCCAF
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioAWCCAF]' 
+ BEGIN  
+DECLARE @Table171127112510 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+SuccessfulTarificationLimit VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey30 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112510 EXEC [VCHReports].[dbo].[FB_ReportRadioAWCCAF]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112510
+ END
+ --VCHReportsdboFBReportRadioAWCCAF
+
+
+  --VCHReportsdboFBReportRadioMovitelMZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioMovitelMZ]' 
+ BEGIN  
+DECLARE @Table171127112616 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112616 EXEC [VCHReports].[dbo].[FB_ReportRadioMovitelMZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112616
+ END
+ --VCHReportsdboFBReportRadioMovitelMZ
+
+
+  --VCHReportsdboFBReportIslamicTigoTD
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportIslamicTigoTD]' 
+ BEGIN  
+DECLARE @Table171127112657 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112657 EXEC [VCHReports].[dbo].[FB_ReportIslamicTigoTD]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112657
+ END
+ --VCHReportsdboFBReportIslamicTigoTD
+
+
+  --VCHReportsdboFBReportChristianTigoTD
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportChristianTigoTD]' 
+ BEGIN  
+DECLARE @Table171127112756 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112756 EXEC [VCHReports].[dbo].[FB_ReportChristianTigoTD]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112756
+ END
+ --VCHReportsdboFBReportChristianTigoTD
+
+
+  --VCHReportsdboFBReportRadioSudaniSD
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadioSudaniSD]' 
+ BEGIN  
+DECLARE @Table171127112819 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112819 EXEC [VCHReports].[dbo].[FB_ReportRadioSudaniSD]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112819
+ END
+ --VCHReportsdboFBReportRadioSudaniSD
+
+
+  --VCHReportsdboFBReportRadioBEELINEUZ
+ Else If @Procudure  = '[VCHReports].[dbo].[FB_ReportRadio_BEELINE_UZ]' 
+ BEGIN  
+DECLARE @Table171127112846 TABLE  ( 
+date DATETIME, 
+servicekey2 VARCHAR(50),
+ActiveStartDayTrial VARCHAR(50),
+ActiveStartDayPayed VARCHAR(50),
+NewSubscribersTrial VARCHAR(50),
+NewSubscribersPayed VARCHAR(50),
+TrialToRegularOk VARCHAR(50),
+ActiveSubscription VARCHAR(50),
+StoppedSubscribersTrial VARCHAR(50),
+StoppedSubscribersPayed VARCHAR(50),
+SuccessfulTarification VARCHAR(50),
+NotSuccessfulTarification VARCHAR(50),
+UnicAbon VARCHAR(50),
+UnicAbonByDate VARCHAR(50),
+UnicCall VARCHAR(50),
+CountCall VARCHAR(50),
+TotalCallDuration VARCHAR(50),
+AvgCallDuration VARCHAR(50),
+ProcentAllSuccessfulTarif VARCHAR(50),
+ProcentAllStoped VARCHAR(50),
+Turnover VARCHAR(50),
+TurnoverUSD VARCHAR(50),
+TotalSubscribersTrial VARCHAR(50),
+TotalSubscribersPaid VARCHAR(50),
+ProcentSuccessfulTarif VARCHAR(50),
+ProcentStoped VARCHAR(50),
+ProcentService VARCHAR(50),
+Service VARCHAR(50),
+ServiceKey29 VARCHAR(50) 
+ ) 
+INSERT INTO @Table171127112846 EXEC [VCHReports].[dbo].[FB_ReportRadio_BEELINE_UZ]  @DateFrom, @Datetime
+INSERT INTO [VCHReports].[dbo].[Unifun_Promo](Date,Country,Operator,Service,Inflow,Outflow,Activation) SELECT date,@Country,@Operator,@Service,CAST(NewSubscribersPayed AS INT) + CAST(NewSubscribersTrial AS INT) ,CAST(StoppedSubscribersTrial AS INT) + CAST(StoppedSubscribersPayed AS INT),UnicAbon FROM @Table171127112846
+ END
+ --VCHReportsdboFBReportRadioBEELINEUZ
+
+
+ --ADDNEWELSEIF
+
+ELSE 
+
+RAISERROR (15600,-1,-1, 'error during procedure call');  
+
+
+ END TRY
+
+ BEGIN CATCH
+
+   
+   if @RunAgain = 0
+   BEGIN
+   
+      print 'error occured' 
+      INSERT INTO [dbo].[UnifunPromoLog] (Date,Country,Operator,Service,Procudure,Error) VALUES (@Datetime,@Country,@Operator,@Service,CONCAT('[VCHReports].[dbo].[Unufun_Promo_DataCollection] ',"'"+@Country+"',","'"+@Operator+"',","'"+@Service+"',","'"+@Procudure+"',",1),'Error Occured');
+   
+   END
+
+ END CATCH
+
+
+
+END
+
+
+
+
+
+
+

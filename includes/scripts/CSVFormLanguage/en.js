@@ -1,0 +1,21 @@
+var UILanguage = {
+    "UILanguage" : "English",
+    "selectFile" : "Please select a file. Thank you",
+    "selectCSVFile" : "Please select a CSV file. Thank you",
+    "separatorOptions" : "Seperator Options",
+    "tab" : "Tab",
+    "comma" : "Comma",
+    "semicolon" : "Semicolon",
+    "space" : "Space",
+    "other" : "Other",
+    "fileImportOptions" : "File Import Options",
+    "characterSet" : "Character Set",
+    "standard" : "Standard",
+    "fromRow" : "From row",
+    "language" : "Language",
+    "fields" : "Fields",
+    "cancel" : "Cancel",
+    "import" : "Import",
+    "separatedBy" : "Separated By",
+    "ok" : "OK"
+};
